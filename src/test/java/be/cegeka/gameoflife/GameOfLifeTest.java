@@ -7,6 +7,7 @@ import java.util.List;
 import static be.cegeka.gameoflife.Cell.dead;
 import static be.cegeka.gameoflife.Cell.live;
 import static be.cegeka.gameoflife.Position.pos;
+import static be.cegeka.gameoflife.UnderpopulationRule.DEATH;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,7 +32,7 @@ public class GameOfLifeTest {
         Position posOfCellUnderTest = pos(1, 0);
         Cell cellUnderTest = world.cellAt(posOfCellUnderTest);
         String outcome = underpopulationRuleOutcome(cellUnderTest, world.getLiveNeighbours(posOfCellUnderTest));
-        if ("Death".equals(outcome)) {
+        if (DEATH.equals(outcome)) {
             cellUnderTest.kill();
         }
         return world;

@@ -41,5 +41,6 @@ class Cell {
 
 
     public void kill() {
+        alive = false;
     }
 }

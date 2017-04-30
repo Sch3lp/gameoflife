@@ -40,7 +40,7 @@ public class GameOfLifeTest {
         return new UnderpopulationRuleStub().apply(cell, liveNeighbours);
     }
 
-    private class UnderpopulationRuleStub implements UnderpopulationRule {
+    private class UnderpopulationRuleStub extends UnderpopulationRule {
         public String apply(Position cell, List<Cell> liveNeighbours) {
             return "death";
         }

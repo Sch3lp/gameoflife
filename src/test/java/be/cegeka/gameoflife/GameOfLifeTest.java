@@ -31,7 +31,7 @@ public class GameOfLifeTest {
         Position posOfCellUnderTest = pos(1, 0);
         Cell cellUnderTest = world.cellAt(posOfCellUnderTest);
         String outcome = underpopulationRuleOutcome(cellUnderTest, world.getLiveNeighbours(posOfCellUnderTest));
-        if ("death".equals(outcome)) {
+        if ("Death".equals(outcome)) {
             cellUnderTest.kill();
         }
         return world;

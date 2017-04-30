@@ -2,8 +2,11 @@ package be.cegeka.gameoflife;
 
 import org.junit.Test;
 
+import java.util.List;
+
 import static be.cegeka.gameoflife.Cell.dead;
 import static be.cegeka.gameoflife.Cell.live;
+import static be.cegeka.gameoflife.Position.pos;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,7 +28,16 @@ public class GameOfLifeTest {
     }
 
     private Generation tick(Generation world) {
+        Position cellUnderTest = pos(1, 0);
+        String outcome = underpopulationRuleOutcome(cellUnderTest, world.getLiveNeighbours(cellUnderTest));
+        if ("death".equals(outcome)){
+            world.cellAt(cellUnderTest).kill();
+        }
         return world;
+    }
+
+    private String underpopulationRuleOutcome(Position cell, List<Cell> liveNeighbours) {
+        return "";
     }
 
 }

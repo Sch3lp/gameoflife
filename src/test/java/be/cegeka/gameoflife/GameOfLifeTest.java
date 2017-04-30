@@ -37,7 +37,12 @@ public class GameOfLifeTest {
     }
 
     private String underpopulationRuleOutcome(Position cell, List<Cell> liveNeighbours) {
-        return "death";
+        return new UnderpopulationRuleStub().apply(cell, liveNeighbours);
     }
 
+    private class UnderpopulationRuleStub implements UnderpopulationRule {
+        public String apply(Position cell, List<Cell> liveNeighbours) {
+            return "death";
+        }
+    }
 }

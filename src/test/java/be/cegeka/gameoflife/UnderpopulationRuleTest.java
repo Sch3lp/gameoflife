@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static be.cegeka.gameoflife.Cell.dead;
 import static be.cegeka.gameoflife.Cell.live;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -37,6 +38,36 @@ public class UnderpopulationRuleTest {
         List<Cell> liveNeighbours = asList(live(), live());
 
         String outcome = new UnderpopulationRule().apply(liveCell, liveNeighbours);
+
+        assertThat(outcome).isEqualTo("");
+    }
+
+    @Test
+    public void apply_DeadCellWithoutNeighbours_Blank() throws Exception {
+        Cell deadCell = dead();
+        List<Cell> liveNeighbours = emptyList();
+
+        String outcome = new UnderpopulationRule().apply(deadCell, liveNeighbours);
+
+        assertThat(outcome).isEqualTo("");
+    }
+
+    @Test
+    public void apply_DeadCellWithExactlyOneNeighbour_Blank() throws Exception {
+        Cell deadCell = dead();
+        List<Cell> liveNeighbours = asList(live());
+
+        String outcome = new UnderpopulationRule().apply(deadCell, liveNeighbours);
+
+        assertThat(outcome).isEqualTo("");
+    }
+
+    @Test
+    public void apply_DeadCellWithExactlyTwoNeighbours_Blank() throws Exception {
+        Cell deadCell = dead();
+        List<Cell> liveNeighbours = asList(live(), live());
+
+        String outcome = new UnderpopulationRule().apply(deadCell, liveNeighbours);
 
         assertThat(outcome).isEqualTo("");
     }

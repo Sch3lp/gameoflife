@@ -11,7 +11,7 @@ public class UnderpopulationRuleTest {
 
     @Test
     public void liveCellWithFewerThanTwoLiveNeighboursDies() throws Exception {
-        Cell cell = Cell.dead();
+        Cell cell = Cell.live();
         List<Cell> liveNeighbours = Collections.emptyList();
 
         String outcome = new UnderpopulationRule().apply(cell, liveNeighbours);

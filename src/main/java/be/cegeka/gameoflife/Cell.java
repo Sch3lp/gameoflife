@@ -21,6 +21,14 @@ class Cell {
         return alive;
     }
 
+    public boolean isDead() {
+        return !isAlive();
+    }
+
+    public void kill() {
+        alive = false;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -34,13 +42,9 @@ class Cell {
         return Objects.hash(alive);
     }
 
+
     @Override
     public String toString() {
         return alive ? "live" : "dead";
-    }
-
-
-    public void kill() {
-        alive = false;
     }
 }

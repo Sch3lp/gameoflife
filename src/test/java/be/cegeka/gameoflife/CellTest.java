@@ -33,7 +33,17 @@ public class CellTest {
 
     @Test
     public void isAlive_DeadCell_IsNotAlive() throws Exception {
+        assertThat(dead().isAlive()).isFalse();
+    }
+
+    @Test
+    public void isDead_DeadCell_IsDead() throws Exception {
         assertThat(dead().isDead()).isTrue();
+    }
+
+    @Test
+    public void isDead_LiveCell_IsNotDead() throws Exception {
+        assertThat(live().isDead()).isFalse();
     }
 
     @Test

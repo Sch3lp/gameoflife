@@ -28,20 +28,21 @@ public class GameOfLifeTest {
     }
 
     private Generation tick(Generation world) {
-        Position cellUnderTest = pos(1, 0);
-        String outcome = underpopulationRuleOutcome(cellUnderTest, world.getLiveNeighbours(cellUnderTest));
+        Position posOfCellUnderTest = pos(1, 0);
+        Cell cellUnderTest = world.cellAt(posOfCellUnderTest);
+        String outcome = underpopulationRuleOutcome(cellUnderTest, world.getLiveNeighbours(posOfCellUnderTest));
         if ("death".equals(outcome)) {
-            world.cellAt(cellUnderTest).kill();
+            cellUnderTest.kill();
         }
         return world;
     }
 
-    private String underpopulationRuleOutcome(Position cell, List<Cell> liveNeighbours) {
+    private String underpopulationRuleOutcome(Cell cell, List<Cell> liveNeighbours) {
         return new UnderpopulationRuleStub().apply(cell, liveNeighbours);
     }
 
     private class UnderpopulationRuleStub extends UnderpopulationRule {
-        public String apply(Position cell, List<Cell> liveNeighbours) {
+        public String apply(Cell cell, List<Cell> liveNeighbours) {
             return "death";
         }
     }

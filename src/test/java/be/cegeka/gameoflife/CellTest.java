@@ -35,4 +35,20 @@ public class CellTest {
     public void isAlive_DeadCell_IsNotAlive() throws Exception {
         assertThat(dead().isAlive()).isFalse();
     }
+
+    @Test
+    public void kill_DeadCell_StaysDead() throws Exception {
+        Cell cell = dead();
+        cell.kill();
+
+        assertThat(cell.isAlive()).isFalse();
+    }
+
+    @Test
+    public void kill_LiveCell_IsNoLongerAlive() throws Exception {
+        Cell cell = live();
+        cell.kill();
+
+        assertThat(cell.isAlive()).isFalse();
+    }
 }

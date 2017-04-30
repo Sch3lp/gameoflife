@@ -40,4 +40,6 @@ class Cell {
     }
 
 
+    public void kill() {
+    }
 }

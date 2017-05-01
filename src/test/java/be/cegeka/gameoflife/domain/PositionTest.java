@@ -1,8 +1,9 @@
-package be.cegeka.gameoflife;
+package be.cegeka.gameoflife.domain;
 
+import be.cegeka.gameoflife.domain.Position;
 import org.junit.Test;
 
-import static be.cegeka.gameoflife.Position.pos;
+import static be.cegeka.gameoflife.domain.Position.pos;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PositionTest {

@@ -1,8 +1,8 @@
-package be.cegeka.gameoflife;
+package be.cegeka.gameoflife.domain;
 
 import java.util.Objects;
 
-class Cell {
+public class Cell {
     private boolean alive;
 
     public static Cell live() {

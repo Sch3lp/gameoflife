@@ -1,13 +1,16 @@
-package be.cegeka.gameoflife;
+package be.cegeka.gameoflife.domain;
 
+import be.cegeka.gameoflife.domain.rules.RuleDTOFactory;
+import be.cegeka.gameoflife.domain.rules.RuleDTO;
+import be.cegeka.gameoflife.domain.rules.UnderpopulationRule;
 import org.junit.Test;
 
 import java.util.List;
 
-import static be.cegeka.gameoflife.Cell.dead;
-import static be.cegeka.gameoflife.Cell.live;
-import static be.cegeka.gameoflife.Position.pos;
-import static be.cegeka.gameoflife.UnderpopulationRule.DEATH;
+import static be.cegeka.gameoflife.domain.Cell.dead;
+import static be.cegeka.gameoflife.domain.Cell.live;
+import static be.cegeka.gameoflife.domain.Position.pos;
+import static be.cegeka.gameoflife.domain.rules.UnderpopulationRule.DEATH;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 

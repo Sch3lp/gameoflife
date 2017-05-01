@@ -6,8 +6,7 @@ public class UnderpopulationRule {
     public static final String NOTHING = "Nothing";
 
     public String apply(RuleCell cell) {
-        if (cell.isDead()) return NOTHING;
-        if (cell.amountOfLiveNeighbours() >= 2) return NOTHING;
-        return DEATH;
+        if (cell.isAlive() && cell.amountOfLiveNeighbours() < 2) return DEATH;
+        return NOTHING;
     }
 }

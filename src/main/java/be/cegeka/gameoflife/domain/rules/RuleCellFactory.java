@@ -6,6 +6,6 @@ import java.util.List;
 
 public class RuleCellFactory {
     public RuleCell createRuleCell(Cell cell, List<Cell> liveNeighbours) {
-        return new RuleCell(cell.isAlive(), liveNeighbours.size());
+        return new RuleCell(cell.isAlive(), liveNeighbours.stream().filter(Cell::isAlive).count());
     }
 }

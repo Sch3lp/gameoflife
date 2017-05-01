@@ -4,10 +4,7 @@ import be.cegeka.gameoflife.domain.rules.RuleCell;
 import be.cegeka.gameoflife.domain.rules.RuleCellFactory;
 import be.cegeka.gameoflife.domain.rules.UnderpopulationRule;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -74,7 +71,13 @@ public class Generation {
     }
 
     List<Position> getAllCellPositions() {
-        return null;
+        List<Position> positions = new ArrayList<>();
+        for (int x = 0; x < cells.size(); x++) {
+            for (int y = 0; y < cells.get(x).size(); y++) {
+                positions.add(pos(x,y));
+            }
+        }
+        return positions;
     }
 
     private void underpopulationRule(Cell cell, List<Cell> liveNeighbours) {

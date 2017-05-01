@@ -46,4 +46,10 @@ public final class Position {
         return Objects.hash(x, y);
     }
 
+    @Override
+    public String toString() {
+        return "pos(" + x +
+                "," + y +
+                ')';
+    }
 }

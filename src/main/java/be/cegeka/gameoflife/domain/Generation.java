@@ -1,11 +1,18 @@
 package be.cegeka.gameoflife.domain;
 
+import be.cegeka.gameoflife.domain.rules.RuleCell;
+import be.cegeka.gameoflife.domain.rules.RuleCellFactory;
+import be.cegeka.gameoflife.domain.rules.UnderpopulationRule;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static be.cegeka.gameoflife.domain.Position.pos;
+import static be.cegeka.gameoflife.domain.rules.UnderpopulationRule.DEATH;
 
 public class Generation {
     private List<List<Cell>> cells;
@@ -56,5 +63,20 @@ public class Generation {
             return null;
         }
         return cell;
+    }
+
+    public Generation tick() {
+        Position posOfCellUnderTest = pos(1, 0);
+        Cell cellUnderTest = cellAt(posOfCellUnderTest);
+        underpopulationRule(cellUnderTest, getLiveNeighbours(posOfCellUnderTest));
+        return this;
+    }
+
+    private void underpopulationRule(Cell cell, List<Cell> liveNeighbours) {
+        RuleCell ruleCell = new RuleCellFactory().createRuleCell(cell, liveNeighbours);
+        String outcome = new UnderpopulationRule().apply(ruleCell);
+        if (DEATH.equals(outcome)) {
+            cell.kill();
+        }
     }
 }

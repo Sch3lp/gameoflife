@@ -66,14 +66,7 @@ public class Generation {
         return cell;
     }
 
-    public Generation tick() {
-        getAllCellPositions().stream().map(pos -> ruleCellFactory.createRuleCell(cellAt(pos), getLiveNeighbours(pos), pos))
-        .collect(Collectors.toList()).stream()
-        .map(this::underpopulationRule)
-        .forEach(command -> command.execute(cellAt(command.position())));
-        return this;
-    }
-
+    //TODO introduce Cells SmartCollection
     List<Position> getAllCellPositions() {
         List<Position> positions = new ArrayList<>();
         for (int x = 0; x < cells.size(); x++) {
@@ -84,6 +77,16 @@ public class Generation {
         return positions;
     }
 
+    public Generation tick() {
+        getAllCellPositions().stream().map(pos -> ruleCellFactory.createRuleCell(cellAt(pos), getLiveNeighbours(pos), pos))
+        .collect(Collectors.toList()).stream()
+        .map(this::underpopulationRule)
+        .forEach(command -> command.execute(cellAt(command.position())));
+        return this;
+    }
+
+    //TODO Rules should output RuleCommands
+    //TODO merge RuleCell and Cell?
     private RuleCommand underpopulationRule(RuleCell ruleCell) {
         String outcome = underpopulationRule.apply(ruleCell);
         if (DEATH.equals(outcome)) {

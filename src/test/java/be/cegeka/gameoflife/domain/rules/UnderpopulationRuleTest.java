@@ -7,6 +7,7 @@ import java.util.List;
 
 import static be.cegeka.gameoflife.domain.Cell.dead;
 import static be.cegeka.gameoflife.domain.Cell.live;
+import static be.cegeka.gameoflife.domain.rules.RuleDTOTestBuilder.aRuleDTO;
 import static be.cegeka.gameoflife.domain.rules.UnderpopulationRule.DEATH;
 import static be.cegeka.gameoflife.domain.rules.UnderpopulationRule.NOTHING;
 import static java.util.Arrays.asList;
@@ -17,10 +18,7 @@ public class UnderpopulationRuleTest {
 
     @Test
     public void apply_LiveCellWithoutNeighbours_Death() throws Exception {
-        Cell liveCell = live();
-        List<Cell> liveNeighbours = emptyList();
-
-        RuleDTO ruleDTO = createRuleDTO(liveCell, liveNeighbours);
+        RuleDTO ruleDTO = aRuleDTO().withDead(false).withAmountOfNeighbours(0).build();
         String outcome = new UnderpopulationRule().apply(ruleDTO);
 
         assertThat(outcome).isEqualTo(DEATH);

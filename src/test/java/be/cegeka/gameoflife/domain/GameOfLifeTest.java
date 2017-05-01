@@ -42,4 +42,19 @@ public class GameOfLifeTest {
                 asList(dead(), dead(), dead(), live(), live())
         );
     }
+
+    @Test
+    public void rowOfLiveCells_OuterLiveCellsShouldDie() throws Exception {
+        Generation world = Generation.of(
+                asList(dead(), dead(), dead()),
+                asList(live(), live(), live()),
+                asList(dead(), dead(), dead())
+        );
+
+        assertThat(world.tick().as2DList()).containsExactly(
+                asList(dead(), dead(), dead()),
+                asList(dead(), live(), dead()),
+                asList(dead(), dead(), dead())
+        );
+    }
 }

@@ -39,6 +39,7 @@ public class GameOfLifeTest {
     }
 
     private String underpopulationRuleOutcome(Cell cell, List<Cell> liveNeighbours) {
-        return new UnderpopulationRule().apply(cell, liveNeighbours);
+        RuleDTO ruleDTO = new RuleDTOFactory().createRuleDTO(cell, liveNeighbours);
+        return new UnderpopulationRule().apply(ruleDTO);
     }
 }

@@ -19,7 +19,8 @@ public class UnderpopulationRuleTest {
         Cell liveCell = live();
         List<Cell> liveNeighbours = emptyList();
 
-        String outcome = new UnderpopulationRule().apply(liveCell, liveNeighbours);
+        RuleDTO ruleDTO = createRuleDTO(liveCell, liveNeighbours);
+        String outcome = new UnderpopulationRule().apply(ruleDTO);
 
         assertThat(outcome).isEqualTo(DEATH);
     }
@@ -29,7 +30,8 @@ public class UnderpopulationRuleTest {
         Cell liveCell = live();
         List<Cell> liveNeighbours = asList(live());
 
-        String outcome = new UnderpopulationRule().apply(liveCell, liveNeighbours);
+        RuleDTO ruleDTO = createRuleDTO(liveCell, liveNeighbours);
+        String outcome = new UnderpopulationRule().apply(ruleDTO);
 
         assertThat(outcome).isEqualTo(DEATH);
     }
@@ -39,7 +41,8 @@ public class UnderpopulationRuleTest {
         Cell liveCell = live();
         List<Cell> liveNeighbours = asList(live(), live());
 
-        String outcome = new UnderpopulationRule().apply(liveCell, liveNeighbours);
+        RuleDTO ruleDTO = createRuleDTO(liveCell, liveNeighbours);
+        String outcome = new UnderpopulationRule().apply(ruleDTO);
 
         assertThat(outcome).isEqualTo(NOTHING);
     }
@@ -49,7 +52,8 @@ public class UnderpopulationRuleTest {
         Cell deadCell = dead();
         List<Cell> liveNeighbours = emptyList();
 
-        String outcome = new UnderpopulationRule().apply(deadCell, liveNeighbours);
+        RuleDTO ruleDTO = createRuleDTO(deadCell, liveNeighbours);
+        String outcome = new UnderpopulationRule().apply(ruleDTO);
 
         assertThat(outcome).isEqualTo(NOTHING);
     }
@@ -59,7 +63,8 @@ public class UnderpopulationRuleTest {
         Cell deadCell = dead();
         List<Cell> liveNeighbours = asList(live());
 
-        String outcome = new UnderpopulationRule().apply(deadCell, liveNeighbours);
+        RuleDTO ruleDTO = createRuleDTO(deadCell, liveNeighbours);
+        String outcome = new UnderpopulationRule().apply(ruleDTO);
 
         assertThat(outcome).isEqualTo(NOTHING);
     }
@@ -69,8 +74,13 @@ public class UnderpopulationRuleTest {
         Cell deadCell = dead();
         List<Cell> liveNeighbours = asList(live(), live());
 
-        String outcome = new UnderpopulationRule().apply(deadCell, liveNeighbours);
+        RuleDTO ruleDTO = createRuleDTO(deadCell, liveNeighbours);
+        String outcome = new UnderpopulationRule().apply(ruleDTO);
 
         assertThat(outcome).isEqualTo(NOTHING);
+    }
+
+    private RuleDTO createRuleDTO(Cell liveCell, List<Cell> liveNeighbours) {
+        return new RuleDTOFactory().createRuleDTO(liveCell, liveNeighbours);
     }
 }

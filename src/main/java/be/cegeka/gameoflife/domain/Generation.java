@@ -63,10 +63,10 @@ public class Generation {
     }
 
     public Generation tick() {
-        getAllCellPositions();
-        Position posOfCellUnderTest = pos(1, 0);
-        Cell cellUnderTest = cellAt(posOfCellUnderTest);
-        underpopulationRule(cellUnderTest, getLiveNeighbours(posOfCellUnderTest));
+        getAllCellPositions().forEach(posOfCellUnderTest -> {
+            Cell cellUnderTest = cellAt(posOfCellUnderTest);
+            underpopulationRule(cellUnderTest, getLiveNeighbours(posOfCellUnderTest));
+        });
         return this;
     }
 

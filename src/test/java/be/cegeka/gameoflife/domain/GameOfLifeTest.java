@@ -23,4 +23,23 @@ public class GameOfLifeTest {
                 asList(dead(), dead(), live())
         );
     }
+
+    @Test
+    public void multipleLiveCellsWithFewerThanTwoLiveNeighboursDies() throws Exception {
+        Generation world = Generation.of(
+                asList(dead(), dead(), dead(), live(), live()),
+                asList(dead(), dead(), dead(), live(), live()),
+                asList(live(), live(), live(), live(), live()),
+                asList(dead(), dead(), dead(), live(), live()),
+                asList(dead(), dead(), dead(), live(), live())
+        );
+
+        assertThat(world.tick().as2DList()).containsExactly(
+                asList(dead(), dead(), dead(), live(), live()),
+                asList(dead(), dead(), dead(), live(), live()),
+                asList(dead(), dead(), live(), live(), live()),
+                asList(dead(), dead(), dead(), live(), live()),
+                asList(dead(), dead(), dead(), live(), live())
+        );
+    }
 }

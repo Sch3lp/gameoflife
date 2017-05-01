@@ -1,7 +1,7 @@
 package be.cegeka.gameoflife.domain;
 
-import be.cegeka.gameoflife.domain.rules.RuleDTOFactory;
-import be.cegeka.gameoflife.domain.rules.RuleDTO;
+import be.cegeka.gameoflife.domain.rules.RuleCellFactory;
+import be.cegeka.gameoflife.domain.rules.RuleCell;
 import be.cegeka.gameoflife.domain.rules.UnderpopulationRule;
 import org.junit.Test;
 
@@ -42,7 +42,7 @@ public class GameOfLifeTest {
     }
 
     private String underpopulationRuleOutcome(Cell cell, List<Cell> liveNeighbours) {
-        RuleDTO ruleDTO = new RuleDTOFactory().createRuleDTO(cell, liveNeighbours);
-        return new UnderpopulationRule().apply(ruleDTO);
+        RuleCell ruleCell = new RuleCellFactory().createRuleCell(cell, liveNeighbours);
+        return new UnderpopulationRule().apply(ruleCell);
     }
 }

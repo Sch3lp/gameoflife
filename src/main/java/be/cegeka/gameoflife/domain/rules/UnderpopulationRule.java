@@ -5,9 +5,9 @@ public class UnderpopulationRule {
     public static final String DEATH = "Death";
     public static final String NOTHING = "Nothing";
 
-    public String apply(RuleDTO ruleDTO) {
-        if (ruleDTO.isDead()) return NOTHING;
-        if (ruleDTO.amountOfliveNeighbours() >= 2) return NOTHING;
+    public String apply(RuleCell cell) {
+        if (cell.isDead()) return NOTHING;
+        if (cell.amountOfLiveNeighbours() >= 2) return NOTHING;
         return DEATH;
     }
 }

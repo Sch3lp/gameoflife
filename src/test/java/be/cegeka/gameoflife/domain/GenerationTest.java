@@ -73,4 +73,49 @@ public class GenerationTest {
         Generation generation = Generation.of(asList(live(), live(), live()));
         assertThat(generation.cellAt(pos(0, -1))).isNull();
     }
+
+    @Test
+    public void getAllCellPositions_3by3_ReturnsAll9PositionsFrom_0x0_to_2x2() throws Exception {
+        Generation generation = Generation.of
+                ( asList(live(), live(), live())
+                , asList(dead(), live(), live())
+                , asList(live(), live(), live())
+                );
+        assertThat(generation.getAllCellPositions())
+                .containsExactly
+                        ( pos(0,0), pos(0,1), pos(0,2)
+                        , pos(1,0), pos(1,1), pos(1,2)
+                        , pos(2,0), pos(2,1), pos(2,2)
+                        );
+    }
+
+    @Test
+    public void getAllCellPositions_3by2_ReturnsAll6PositionsFrom_0x0_to_2x1() throws Exception {
+        Generation generation = Generation.of
+                ( asList(live(), live())
+                , asList(dead(), live())
+                , asList(live(), live())
+                );
+        assertThat(generation.getAllCellPositions())
+                .containsExactly
+                        ( pos(0,0), pos(0,1)
+                        , pos(1,0), pos(1,1)
+                        , pos(2,0), pos(2,1)
+                        );
+    }
+
+    @Test
+    public void getAllCellPositions_WeirdShape_StillWorks() throws Exception {
+        Generation generation = Generation.of
+                ( asList(live(), live())
+                , asList(dead(), live(), dead(), live())
+                , asList(live(), live())
+                );
+        assertThat(generation.getAllCellPositions())
+                .containsExactly
+                        ( pos(0,0), pos(0,1)
+                        , pos(1,0), pos(1,1), pos(1,2), pos(1,3)
+                        , pos(2,0), pos(2,1)
+                        );
+    }
 }

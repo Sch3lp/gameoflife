@@ -1,11 +1,12 @@
 package be.cegeka.gameoflife.domain.rules;
 
 import be.cegeka.gameoflife.domain.Cell;
+import be.cegeka.gameoflife.domain.Position;
 
 import java.util.List;
 
 public class RuleCellFactory {
-    public RuleCell createRuleCell(Cell cell, List<Cell> liveNeighbours) {
-        return new RuleCell(cell.isAlive(), liveNeighbours.stream().filter(Cell::isAlive).count());
+    public RuleCell createRuleCell(Cell cell, List<Cell> liveNeighbours, Position position) {
+        return new RuleCell(cell.isAlive(), liveNeighbours.stream().filter(Cell::isAlive).count(), position);
     }
 }

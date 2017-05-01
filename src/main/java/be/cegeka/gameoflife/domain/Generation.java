@@ -2,6 +2,7 @@ package be.cegeka.gameoflife.domain;
 
 import be.cegeka.gameoflife.domain.rules.RuleCell;
 import be.cegeka.gameoflife.domain.rules.RuleCellFactory;
+import be.cegeka.gameoflife.domain.rules.RuleCommand;
 import be.cegeka.gameoflife.domain.rules.UnderpopulationRule;
 
 import java.util.*;
@@ -12,6 +13,9 @@ import static be.cegeka.gameoflife.domain.Position.pos;
 import static be.cegeka.gameoflife.domain.rules.UnderpopulationRule.DEATH;
 
 public class Generation {
+    private final UnderpopulationRule underpopulationRule = new UnderpopulationRule();
+    private final RuleCellFactory ruleCellFactory = new RuleCellFactory();
+
     private List<List<Cell>> cells;
 
     public Generation(List<List<Cell>> cells) {
@@ -63,10 +67,10 @@ public class Generation {
     }
 
     public Generation tick() {
-        getAllCellPositions().forEach(posOfCellUnderTest -> {
-            Cell cellUnderTest = cellAt(posOfCellUnderTest);
-            underpopulationRule(cellUnderTest, getLiveNeighbours(posOfCellUnderTest));
-        });
+        getAllCellPositions().stream().map(pos -> ruleCellFactory.createRuleCell(cellAt(pos), getLiveNeighbours(pos), pos))
+        .collect(Collectors.toList()).stream()
+        .map(this::underpopulationRule)
+        .forEach(command -> command.execute(cellAt(command.position())));
         return this;
     }
 
@@ -80,11 +84,31 @@ public class Generation {
         return positions;
     }
 
-    private void underpopulationRule(Cell cell, List<Cell> liveNeighbours) {
-        RuleCell ruleCell = new RuleCellFactory().createRuleCell(cell, liveNeighbours);
-        String outcome = new UnderpopulationRule().apply(ruleCell);
+    private RuleCommand underpopulationRule(RuleCell ruleCell) {
+        String outcome = underpopulationRule.apply(ruleCell);
         if (DEATH.equals(outcome)) {
-            cell.kill();
+            return new RuleCommand(){
+                @Override
+                public void execute(Cell cell) {
+                    cell.kill();
+                }
+
+                @Override
+                public Position position() {
+                    return ruleCell.position();
+                }
+            };
+        } else {
+            return new RuleCommand(){
+                @Override
+                public void execute(Cell cell) {
+                }
+
+                @Override
+                public Position position() {
+                    return ruleCell.position();
+                }
+            };
         }
     }
 }

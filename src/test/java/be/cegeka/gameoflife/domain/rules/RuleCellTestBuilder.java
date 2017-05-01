@@ -1,9 +1,12 @@
 package be.cegeka.gameoflife.domain.rules;
 
+import be.cegeka.gameoflife.domain.Position;
+
 public class RuleCellTestBuilder {
 
     private boolean isAlive;
     private int amountOfNeighbours;
+    private Position position;
 
     private RuleCellTestBuilder(boolean isAlive) {
         this.isAlive = isAlive;
@@ -28,8 +31,13 @@ public class RuleCellTestBuilder {
         return this;
     }
 
+    public RuleCellTestBuilder withPosition(Position position) {
+        this.position = position;
+        return this;
+    }
+
     public RuleCell build() {
-        return new RuleCell(isAlive, amountOfNeighbours);
+        return new RuleCell(isAlive, amountOfNeighbours, position);
     }
 
 }
